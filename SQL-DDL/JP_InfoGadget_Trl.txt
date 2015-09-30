@@ -1,0 +1,22 @@
+CREATE TABLE adempiere.JP_InfoGadget_Trl
+(
+  JP_InfoGadget_ID numeric(10,0) NOT NULL,
+  AD_Language character varying(6) NOT NULL,
+  JP_InfoGadget_Trl_uu character varying(36) DEFAULT NULL::character varying,
+  AD_Client_ID numeric(10,0) NOT NULL,
+  AD_Org_ID numeric(10,0) NOT NULL,
+  IsActive character(1) NOT NULL DEFAULT 'Y'::bpchar,
+  Created timestamp without time zone NOT NULL DEFAULT now(),
+  CreatedBy numeric(10,0) NOT NULL,
+  Updated timestamp without time zone NOT NULL DEFAULT now(),
+  UpdatedBy numeric(10,0) NOT NULL,
+
+
+  IsTranslated character(1) NOT NULL DEFAULT 'N'::bpchar,
+  
+  Name character varying(120) NOT NULL,
+  Description character varying(255),
+  HTML text,
+
+  CONSTRAINT JP_InfoGadget_Trl_pkey PRIMARY KEY (JP_InfoGadget_ID,AD_Language)
+)

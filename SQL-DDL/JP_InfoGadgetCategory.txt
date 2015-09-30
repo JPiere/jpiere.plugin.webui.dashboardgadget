@@ -1,0 +1,23 @@
+CREATE TABLE adempiere.JP_InfoGadgetCategory
+(
+  JP_InfoGadgetCategory_ID numeric(10,0) NOT NULL,
+  JP_InfoGadgetCategory_uu character varying(36) DEFAULT NULL::character varying,
+  AD_Client_ID numeric(10,0) NOT NULL,
+  AD_Org_ID numeric(10,0) NOT NULL,
+  IsActive character(1) NOT NULL DEFAULT 'Y'::bpchar,
+  Created timestamp without time zone NOT NULL DEFAULT now(),
+  CreatedBy numeric(10,0) NOT NULL,
+  Updated timestamp without time zone NOT NULL DEFAULT now(),
+  UpdatedBy numeric(10,0) NOT NULL,
+
+
+  Value character varying(40) NOT NULL,
+  Name character varying(120) NOT NULL,
+  Description character varying(255),
+  Help character varying(2000),
+  MaxQueryRecords numeric(10,0) NOT NULL DEFAULT 0::numeric,
+  JP_PageSize numeric(10,0) NOT NULL DEFAULT 5::numeric,
+
+
+  CONSTRAINT JP_InfoGadgetCategory_pkey PRIMARY KEY (JP_InfoGadgetCategory_ID)
+)

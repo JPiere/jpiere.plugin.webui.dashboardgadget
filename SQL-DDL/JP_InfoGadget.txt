@@ -1,0 +1,26 @@
+CREATE TABLE adempiere.JP_InfoGadget
+(
+  JP_InfoGadget_ID numeric(10,0) NOT NULL,
+  JP_InfoGadget_uu character varying(36) DEFAULT NULL::character varying,
+  AD_Client_ID numeric(10,0) NOT NULL,
+  AD_Org_ID numeric(10,0) NOT NULL,
+  IsActive character(1) NOT NULL DEFAULT 'Y'::bpchar,
+  Created timestamp without time zone NOT NULL DEFAULT now(),
+  CreatedBy numeric(10,0) NOT NULL,
+  Updated timestamp without time zone NOT NULL DEFAULT now(),
+  UpdatedBy numeric(10,0) NOT NULL,
+
+
+  Value character varying(40) NOT NULL,
+  Name character varying(120) NOT NULL,
+  Description character varying(255),
+  JP_InfoGadgetCategory_ID  numeric(10,0) NOT NULL,
+  HTML text,
+  Date1 timestamp without time zone NOT NULL,
+  DateFrom timestamp without time zone NOT NULL,
+  DateTo timestamp without time zone NOT NULL,
+  IsCollapsedByDefault character(1) NOT NULL DEFAULT 'Y'::bpchar,
+
+
+  CONSTRAINT JP_InfoGadget_pkey PRIMARY KEY (JP_InfoGadget_ID)
+)
