@@ -21,7 +21,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 import org.compiere.model.*;
-import org.compiere.util.KeyNamePair;
 
 /** Generated Model for JP_InfoGadget
  *  @author iDempiere (generated) 
@@ -32,7 +31,7 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150929L;
+	private static final long serialVersionUID = 20151002L;
 
     /** Standard Constructor */
     public X_JP_InfoGadget (Properties ctx, int JP_InfoGadget_ID, String trxName)
@@ -43,11 +42,13 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 			setDate1 (new Timestamp( System.currentTimeMillis() ));
 			setDateFrom (new Timestamp( System.currentTimeMillis() ));
 			setDateTo (new Timestamp( System.currentTimeMillis() ));
-			setIsCollapsedByDefault (true);
-// Y
+			setIsCollapsedByDefault (false);
+// N
 			setJP_InfoGadgetCategory_ID (0);
 			setJP_InfoGadget_ID (0);
 			setName (null);
+			setPublishStatus (null);
+// U
 			setValue (null);
         } */
     }
@@ -191,8 +192,8 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 		return (I_JP_InfoGadgetCategory)MTable.get(getCtx(), I_JP_InfoGadgetCategory.Table_Name)
 			.getPO(getJP_InfoGadgetCategory_ID(), get_TrxName());	}
 
-	/** Set JP_InfoGadgetCategory.
-		@param JP_InfoGadgetCategory_ID JP_InfoGadgetCategory	  */
+	/** Set Info Gadget Category.
+		@param JP_InfoGadgetCategory_ID Info Gadget Category	  */
 	public void setJP_InfoGadgetCategory_ID (int JP_InfoGadgetCategory_ID)
 	{
 		if (JP_InfoGadgetCategory_ID < 1) 
@@ -201,8 +202,8 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 			set_Value (COLUMNNAME_JP_InfoGadgetCategory_ID, Integer.valueOf(JP_InfoGadgetCategory_ID));
 	}
 
-	/** Get JP_InfoGadgetCategory.
-		@return JP_InfoGadgetCategory	  */
+	/** Get Info Gadget Category.
+		@return Info Gadget Category	  */
 	public int getJP_InfoGadgetCategory_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_JP_InfoGadgetCategory_ID);
@@ -211,8 +212,8 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 		return ii.intValue();
 	}
 
-	/** Set JP_InfoGadget.
-		@param JP_InfoGadget_ID JP_InfoGadget	  */
+	/** Set JPiere Information Gadget.
+		@param JP_InfoGadget_ID JPiere Information Gadget	  */
 	public void setJP_InfoGadget_ID (int JP_InfoGadget_ID)
 	{
 		if (JP_InfoGadget_ID < 1) 
@@ -221,8 +222,8 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 			set_ValueNoCheck (COLUMNNAME_JP_InfoGadget_ID, Integer.valueOf(JP_InfoGadget_ID));
 	}
 
-	/** Get JP_InfoGadget.
-		@return JP_InfoGadget	  */
+	/** Get JPiere Information Gadget.
+		@return JPiere Information Gadget	  */
 	public int getJP_InfoGadget_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_JP_InfoGadget_ID);
@@ -262,6 +263,34 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 		return (String)get_Value(COLUMNNAME_Name);
 	}
 
+	/** PublishStatus AD_Reference_ID=310 */
+	public static final int PUBLISHSTATUS_AD_Reference_ID=310;
+	/** Released = R */
+	public static final String PUBLISHSTATUS_Released = "R";
+	/** Test = T */
+	public static final String PUBLISHSTATUS_Test = "T";
+	/** Under Revision = U */
+	public static final String PUBLISHSTATUS_UnderRevision = "U";
+	/** Void = V */
+	public static final String PUBLISHSTATUS_Void = "V";
+	/** Set Publication Status.
+		@param PublishStatus 
+		Status of Publication
+	  */
+	public void setPublishStatus (String PublishStatus)
+	{
+
+		set_Value (COLUMNNAME_PublishStatus, PublishStatus);
+	}
+
+	/** Get Publication Status.
+		@return Status of Publication
+	  */
+	public String getPublishStatus () 
+	{
+		return (String)get_Value(COLUMNNAME_PublishStatus);
+	}
+
 	/** Set Search Key.
 		@param Value 
 		Search key for the record in the format required - must be unique
@@ -278,12 +307,4 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
 	{
 		return (String)get_Value(COLUMNNAME_Value);
 	}
-
-    /** Get Record ID/ColumnName
-        @return ID/ColumnName pair
-      */
-    public KeyNamePair getKeyNamePair() 
-    {
-        return new KeyNamePair(get_ID(), getValue());
-    }
 }

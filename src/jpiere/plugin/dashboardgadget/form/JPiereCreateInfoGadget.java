@@ -55,50 +55,51 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 	private Rows gridRows = grid.newRows();
 	private Language lang = Env.getLanguage(Env.getCtx());
 	private boolean isMultiLingual = true;
-	
+
 	public JPiereCreateInfoGadget(int JP_InfoGadgetCategory_ID)
 	{
 		super();
 		this.appendChild(grid);
-				
+
 		MInfoGadgetCategory infoGadgetCategory = new MInfoGadgetCategory(Env.getCtx(), JP_InfoGadgetCategory_ID, null);
 		if(infoGadgetCategory.getJP_PageSize()>0)
 		{
 			grid.setMold("paging");
 			grid.setPageSize(infoGadgetCategory.getJP_PageSize());
 		}
-		
+
 		Calendar  calendar = Calendar.getInstance();
 		long longtime = calendar.getTimeInMillis();
 		Timestamp timestamp = new Timestamp(longtime);
 		String systemTime = timestamp.toString();
 		StringBuilder whereClause = new StringBuilder(" AND IsActive='Y' AND DateFrom <= TO_DATE('"+ systemTime +"','YYYY-MM-DD HH24:MI:SS') AND DateTo >= TO_DATE('"+systemTime+"','YYYY-MM-DD HH24:MI:SS')");
+										whereClause.append(" AND PublishStatus = 'R' " );
 		if(Env.getAD_Client_ID(Env.getCtx())==0)
 		{
 			whereClause.append(" AND AD_Client_ID = 0");
 		}else{
 			whereClause.append(" AND AD_Client_ID in(0,"+Env.getAD_Client_ID(Env.getCtx())+") ");
 		}
-		
+
 		MRole role = MRole.get(Env.getCtx(), Env.getAD_Role_ID(Env.getCtx()));
 		whereClause.append(" AND "+ role.getOrgWhere(false));
-			
+
 		StringBuilder orderClause = new StringBuilder(" Date1 DESC, JP_InfoGadget_ID DESC");
-		
+
 //		if(infoGadgetCategory.getMaxQueryRecords() > 0)
 //		{
 //			orderClause.append(" LIMIT "+infoGadgetCategory.getMaxQueryRecords()+" ;");
 //		}
-		
+
 		MInfoGadget[] infoGadgets = infoGadgetCategory.getInfoGadgets(whereClause.toString(),orderClause.toString());
 		for(int i = 0; infoGadgets.length > i; i++)
 		{
-			if(infoGadgetCategory.getMaxQueryRecords()==i)
+			if(infoGadgetCategory.getMaxQueryRecords()==i && infoGadgetCategory.getMaxQueryRecords()!= 0)
 				break;
-			
+
 			createInfo(infoGadgets[i]);
 		}
-		
+
 		//When no data.
 		if(infoGadgets.length==0)
 		{
@@ -106,68 +107,69 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 			row.setClass("jpiere-infogadget-content");
 			row.appendChild(new Html(infoGadgetCategory.getHelp()));
 		}
-		
+
 
 	}
-	
-	
+
+	MTable table_Trl = MTable.get(Env.getCtx(), "JP_InfoGadget_Trl");
+	MClient client = MClient.get(Env.getCtx());
+
 	private void createInfo(MInfoGadget infoGadget)
 	{
-		
-		MTable table_Trl = MTable.get(Env.getCtx(), "JP_InfoGadget_Trl");
-		MClient client = MClient.get(Env.getCtx());
+
+
 
 		if(table_Trl == null)
 		{
 			isMultiLingual = false;
-		
+
 		}else if(!client.isMultiLingualDocument()){
-			
+
 			isMultiLingual = false;
-			
+
 		}else{
-			
+
 			isMultiLingual = true;
 		}
-			
+
 		org.adempiere.webui.component.Row outerRow = new org.adempiere.webui.component.Row();
 		gridRows.appendChild(outerRow);
-		
+
 		Grid innerGrid = new Grid();
 		innerGrid.setSclass("jpiere-infogadget");
-		outerRow.appendChild(innerGrid);	
-		
+		outerRow.appendChild(innerGrid);
+
 		org.zkoss.zul.Rows innerRows = new org.zkoss.zul.Rows();
 		innerGrid.appendChild(innerRows);
-		
+
 		SimpleDateFormat sdf = lang.getDateFormat();
 		String groupTitle = null;
 		if(isMultiLingual)
 		{
-			groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name", Env.getAD_Language(Env.getCtx())));
+			groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name"));
 		}else{
 			groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.getName());
 		}
-			
+
 		Group innerRowGroup = new Group(groupTitle);
 		innerRowGroup.setSclass("jpiere-infogadget-header");
 		innerRows.appendChild(innerRowGroup);
-				
+
 		org.adempiere.webui.component.Row innerRow = new org.adempiere.webui.component.Row();
 		innerRow.setSclass("jpiere-infogadget-content");
-		
+
 		Html html = null;
 		if(isMultiLingual)
 		{
-			html = new Html(infoGadget.get_Translation("HTML", Env.getAD_Language(Env.getCtx())));
+			html = new Html(infoGadget.get_Translation("HTML"));
 		}else{
 			html = new Html(infoGadget.getHTML());
 		}
-		
+
 		innerRow.appendChild(html);
 		innerRow.setGroup(innerRowGroup);
 		innerRows.appendChild(innerRow);
-		
+
 		MAttachment attachment = infoGadget.getAttachment();
 		if(attachment != null)
 		{
@@ -177,7 +179,7 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 				MimetypesFileTypeMap mimeMap = new MimetypesFileTypeMap();
 				File file = entry[j].getFile();
 
-				try 
+				try
 				{
 					AMedia media = new AMedia(file, mimeMap.getContentType(file), null);
 					DynamicMediaLink link = new DynamicMediaLink();
@@ -186,12 +188,12 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 					innerRow.setGroup(innerRowGroup);
 					innerRows.appendChild(innerRow);
 					innerRow.appendChild(link);
-					
+
 					link.setImage(ThemeManager.getThemeResource("images/Attachment24.png"));
 					link.setMedia(media);
-					link.setLabel(media.getName());				
+					link.setLabel(media.getName());
 					link.setStyle("margin: 5px;");
-				} catch (FileNotFoundException e) {	
+				} catch (FileNotFoundException e) {
 					;
 				}
 
@@ -202,16 +204,16 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 
 		if(infoGadget.isCollapsedByDefault())
 		{
-			innerRowGroup.setOpen(false);	
+			innerRowGroup.setOpen(false);
 			innerRow.setVisible(false);
 		}else{
 			innerRowGroup.setOpen(true);
 			innerRow.setVisible(true);
 		}
-		
-		
-		
+
+
+
 	}
-	
-	
+
+
 }

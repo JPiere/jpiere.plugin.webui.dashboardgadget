@@ -15,7 +15,7 @@ CREATE TABLE adempiere.JP_InfoGadgetCategory
   Name character varying(120) NOT NULL,
   Description character varying(255),
   Help character varying(2000),
-  MaxQueryRecords numeric(10,0) NOT NULL DEFAULT 0::numeric,
+  MaxQueryRecords numeric(10,0) NOT NULL DEFAULT 20::numeric,
   JP_PageSize numeric(10,0) NOT NULL DEFAULT 5::numeric,
 
 

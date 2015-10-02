@@ -32,7 +32,7 @@ public interface I_JP_InfoGadgetCategory
     /** TableName=JP_InfoGadgetCategory */
     public static final String Table_Name = "JP_InfoGadgetCategory";
 
-    /** AD_Table_ID=1000035 */
+    /** AD_Table_ID=1000036 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -122,10 +122,10 @@ public interface I_JP_InfoGadgetCategory
     /** Column name JP_InfoGadgetCategory_ID */
     public static final String COLUMNNAME_JP_InfoGadgetCategory_ID = "JP_InfoGadgetCategory_ID";
 
-	/** Set JP_InfoGadgetCategory	  */
+	/** Set Info Gadget Category	  */
 	public void setJP_InfoGadgetCategory_ID (int JP_InfoGadgetCategory_ID);
 
-	/** Get JP_InfoGadgetCategory	  */
+	/** Get Info Gadget Category	  */
 	public int getJP_InfoGadgetCategory_ID();
 
     /** Column name JP_InfoGadgetCategory_UU */

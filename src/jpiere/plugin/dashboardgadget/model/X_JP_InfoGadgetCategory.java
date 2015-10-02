@@ -30,7 +30,7 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20150929L;
+	private static final long serialVersionUID = 20151002L;
 
     /** Standard Constructor */
     public X_JP_InfoGadgetCategory (Properties ctx, int JP_InfoGadgetCategory_ID, String trxName)
@@ -42,7 +42,7 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 			setJP_PageSize (0);
 // 5
 			setMaxQueryRecords (0);
-// 0
+// 20
 			setName (null);
 			setValue (null);
         } */
@@ -110,8 +110,8 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 		return (String)get_Value(COLUMNNAME_Help);
 	}
 
-	/** Set JP_InfoGadgetCategory.
-		@param JP_InfoGadgetCategory_ID JP_InfoGadgetCategory	  */
+	/** Set Info Gadget Category.
+		@param JP_InfoGadgetCategory_ID Info Gadget Category	  */
 	public void setJP_InfoGadgetCategory_ID (int JP_InfoGadgetCategory_ID)
 	{
 		if (JP_InfoGadgetCategory_ID < 1) 
@@ -120,8 +120,8 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 			set_ValueNoCheck (COLUMNNAME_JP_InfoGadgetCategory_ID, Integer.valueOf(JP_InfoGadgetCategory_ID));
 	}
 
-	/** Get JP_InfoGadgetCategory.
-		@return JP_InfoGadgetCategory	  */
+	/** Get Info Gadget Category.
+		@return Info Gadget Category	  */
 	public int getJP_InfoGadgetCategory_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_JP_InfoGadgetCategory_ID);

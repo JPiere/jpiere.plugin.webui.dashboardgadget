@@ -32,7 +32,7 @@ public interface I_JP_InfoGadget
     /** TableName=JP_InfoGadget */
     public static final String Table_Name = "JP_InfoGadget";
 
-    /** AD_Table_ID=1000036 */
+    /** AD_Table_ID=1000035 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -170,10 +170,10 @@ public interface I_JP_InfoGadget
     /** Column name JP_InfoGadgetCategory_ID */
     public static final String COLUMNNAME_JP_InfoGadgetCategory_ID = "JP_InfoGadgetCategory_ID";
 
-	/** Set JP_InfoGadgetCategory	  */
+	/** Set Info Gadget Category	  */
 	public void setJP_InfoGadgetCategory_ID (int JP_InfoGadgetCategory_ID);
 
-	/** Get JP_InfoGadgetCategory	  */
+	/** Get Info Gadget Category	  */
 	public int getJP_InfoGadgetCategory_ID();
 
 	public I_JP_InfoGadgetCategory getJP_InfoGadgetCategory() throws RuntimeException;
@@ -181,10 +181,10 @@ public interface I_JP_InfoGadget
     /** Column name JP_InfoGadget_ID */
     public static final String COLUMNNAME_JP_InfoGadget_ID = "JP_InfoGadget_ID";
 
-	/** Set JP_InfoGadget	  */
+	/** Set JPiere Information Gadget	  */
 	public void setJP_InfoGadget_ID (int JP_InfoGadget_ID);
 
-	/** Get JP_InfoGadget	  */
+	/** Get JPiere Information Gadget	  */
 	public int getJP_InfoGadget_ID();
 
     /** Column name JP_InfoGadget_UU */
@@ -208,6 +208,19 @@ public interface I_JP_InfoGadget
 	  * Alphanumeric identifier of the entity
 	  */
 	public String getName();
+
+    /** Column name PublishStatus */
+    public static final String COLUMNNAME_PublishStatus = "PublishStatus";
+
+	/** Set Publication Status.
+	  * Status of Publication
+	  */
+	public void setPublishStatus (String PublishStatus);
+
+	/** Get Publication Status.
+	  * Status of Publication
+	  */
+	public String getPublishStatus();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
