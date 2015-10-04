@@ -17,10 +17,8 @@ package jpiere.plugin.dashboardgadget.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
-
 
 import org.compiere.model.Query;
 import org.compiere.util.DB;
@@ -39,51 +37,55 @@ public class MInfoGadgetCategory extends X_JP_InfoGadgetCategory {
 		super(ctx, rs, trxName);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-	
-	public MInfoGadget[] getInfoGadgets(String whereClause, String orderClause)
+
+	public MInfoGadget[] getInfoGadgets(String whereClause, String orderClause, int maxRows)
 	{
-		
+
 		StringBuilder whereClauseFinal = new StringBuilder(MInfoGadget.COLUMNNAME_JP_InfoGadgetCategory_ID +"=? ");
 		if (!Util.isEmpty(whereClause, true))
 			whereClauseFinal.append(whereClause);
 		if (orderClause.length() == 0)
 			orderClause = MInfoGadget.COLUMNNAME_Date1;
 		//
-		List<MInfoGadget> list = new Query(Env.getCtx(), MInfoGadget.Table_Name, whereClauseFinal.toString(), get_TrxName())
-										.setParameters(get_ID())
-										.setOrderBy(orderClause)
-										.list();
-		
-//		ArrayList<MInfoGadget> list = new ArrayList<MInfoGadget>();
-//		StringBuilder sql = new StringBuilder("SELECT * FROM " + MInfoGadget.Table_Name + " WHERE " + MInfoGadget.COLUMNNAME_JP_InfoGadgetCategory_ID + "=" + get_ID());
-//							sql.append(whereClause);
-//							sql.append(" ORDER BY ").append(orderClause);
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try
-//		{
-//			pstmt = DB.prepareStatement(sql.toString(), get_TrxName());
-//			rs = pstmt.executeQuery();
-//			while (rs.next())
-//				list.add(new MInfoGadget (getCtx(), rs, get_TrxName()));
-//		}
-//		catch (Exception e)
-//		{
-//			log.log(Level.SEVERE, sql, e);
-//		}
-//		finally
-//		{
-//			DB.close(rs, pstmt);
-//			rs = null;
-//			pstmt = null;
-//		}
-		
-		return list.toArray(new MInfoGadget[list.size()]);		
+//		List<MInfoGadget> list = new Query(Env.getCtx(), MInfoGadget.Table_Name, whereClauseFinal.toString(), get_TrxName())
+//										.setParameters(get_ID())
+//										.setOrderBy(orderClause)
+//										.list();
+
+		ArrayList<MInfoGadget> list = new ArrayList<MInfoGadget>();
+		StringBuilder sql = new StringBuilder("SELECT * FROM " + MInfoGadget.Table_Name + " WHERE " + MInfoGadget.COLUMNNAME_JP_InfoGadgetCategory_ID + "=" + get_ID());
+							sql.append(whereClause);
+							sql.append(" ORDER BY ").append(orderClause);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try
+		{
+			pstmt = DB.prepareStatement(sql.toString(), get_TrxName());
+			if (maxRows > 0)
+			{
+				pstmt.setMaxRows(maxRows);
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next())
+				list.add(new MInfoGadget (getCtx(), rs, get_TrxName()));
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, sql.toString(), e);
+		}
+		finally
+		{
+			DB.close(rs, pstmt);
+			rs = null;
+			pstmt = null;
+		}
+
+		return list.toArray(new MInfoGadget[list.size()]);
 	}
 
 	/**	Info Gadget belon to Category					*/
 	protected MInfoGadget[] 	m_InfoGadgets = null;
-	
+
 	/**
 	 * 	Get Lines of Order
 	 * 	@param requery requery
@@ -102,8 +104,8 @@ public class MInfoGadgetCategory extends X_JP_InfoGadgetCategory {
 			orderClause += orderBy;
 		else
 			orderClause += "Date1 DESC";
-		
-		m_InfoGadgets = getInfoGadgets(null, orderClause);
+
+		m_InfoGadgets = getInfoGadgets(null, orderClause, 0);
 		return m_InfoGadgets;
 	}	//	getLines
 
@@ -119,7 +121,7 @@ public class MInfoGadgetCategory extends X_JP_InfoGadgetCategory {
 
 	/**
 	 * 	Get BPartner with Value
-	 *	@param ctx context 
+	 *	@param ctx context
 	 *	@param Value value
 	 *	@return BPartner or null
 	 */
@@ -133,5 +135,5 @@ public class MInfoGadgetCategory extends X_JP_InfoGadgetCategory {
 		.firstOnly();
 		return retValue;
 	}	//	get
-	
+
 }

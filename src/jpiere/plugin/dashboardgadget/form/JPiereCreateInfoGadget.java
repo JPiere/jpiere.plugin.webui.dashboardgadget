@@ -66,6 +66,7 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 		{
 			grid.setMold("paging");
 			grid.setPageSize(infoGadgetCategory.getJP_PageSize());
+			grid.setPagingPosition("top");
 		}
 
 		Calendar  calendar = Calendar.getInstance();
@@ -86,17 +87,9 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 
 		StringBuilder orderClause = new StringBuilder(" Date1 DESC, JP_InfoGadget_ID DESC");
 
-//		if(infoGadgetCategory.getMaxQueryRecords() > 0)
-//		{
-//			orderClause.append(" LIMIT "+infoGadgetCategory.getMaxQueryRecords()+" ;");
-//		}
-
-		MInfoGadget[] infoGadgets = infoGadgetCategory.getInfoGadgets(whereClause.toString(),orderClause.toString());
+		MInfoGadget[] infoGadgets = infoGadgetCategory.getInfoGadgets(whereClause.toString(),orderClause.toString(),infoGadgetCategory.getMaxQueryRecords());
 		for(int i = 0; infoGadgets.length > i; i++)
 		{
-			if(infoGadgetCategory.getMaxQueryRecords()==i && infoGadgetCategory.getMaxQueryRecords()!= 0)
-				break;
-
 			createInfo(infoGadgets[i]);
 		}
 
