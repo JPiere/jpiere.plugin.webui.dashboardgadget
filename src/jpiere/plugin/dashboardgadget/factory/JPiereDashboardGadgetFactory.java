@@ -26,7 +26,7 @@ import org.zkoss.zk.ui.Component;
  *
  */
 public class JPiereDashboardGadgetFactory implements IDashboardGadgetFactory {
-	
+
 	@Override
 	public Component getGadget(String uri, Component parent) {
 

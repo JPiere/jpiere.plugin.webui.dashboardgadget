@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: jpiere.plugin.dashboardgadget
 Bundle-SymbolicName: jpiere.plugin.webui.dashboardgadget;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Vendor: OSS ERP Solutions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
  JavaSE-1.8

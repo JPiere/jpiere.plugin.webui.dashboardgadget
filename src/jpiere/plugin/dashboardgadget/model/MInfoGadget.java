@@ -20,20 +20,17 @@ public class MInfoGadget extends X_JP_InfoGadget {
 
 	public MInfoGadget(Properties ctx, int JP_InfoGadget_ID, String trxName) {
 		super(ctx, JP_InfoGadget_ID, trxName);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public MInfoGadget(Properties ctx, ResultSet rs, String trxName) {
 		super(ctx, rs, trxName);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	@Override
 	protected boolean beforeSave(boolean newRecord) {
-		// TODO 自動生成されたメソッド・スタブ
 		return super.beforeSave(newRecord);
 	}
-	
-	
+
+
 
 }

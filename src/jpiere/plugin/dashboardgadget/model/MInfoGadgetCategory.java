@@ -30,12 +30,10 @@ public class MInfoGadgetCategory extends X_JP_InfoGadgetCategory {
 	public MInfoGadgetCategory(Properties ctx, int JP_InfoGadgetCategory_ID,
 			String trxName) {
 		super(ctx, JP_InfoGadgetCategory_ID, trxName);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public MInfoGadgetCategory(Properties ctx, ResultSet rs, String trxName) {
 		super(ctx, rs, trxName);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public MInfoGadget[] getInfoGadgets(String whereClause, String orderClause, int maxRows)
