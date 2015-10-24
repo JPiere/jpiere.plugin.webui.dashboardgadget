@@ -46,7 +46,7 @@ import org.zkoss.zul.Row;
 /**
  *  JPiere Plugins(JPPS) Dashboard Gadget Create Info Gadget
  *
- *  @author Hideaki Hagiwara（萩原 秀明:h.hagiwara@oss-erp.co.jp）
+ *  @author Hideaki Hagiwara（h.hagiwara@oss-erp.co.jp）
  *
  */
 public class JPiereCreateInfoGadget extends DashboardPanel {
@@ -83,7 +83,9 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 		}
 
 		MRole role = MRole.get(Env.getCtx(), Env.getAD_Role_ID(Env.getCtx()));
-		whereClause.append(" AND "+ role.getOrgWhere(false));
+		String orgAccessSQL = role.getOrgWhere(false);
+		if( orgAccessSQL != null)
+			whereClause.append(" AND ").append(orgAccessSQL);
 
 		StringBuilder orderClause = new StringBuilder(" Date1 DESC, JP_InfoGadget_ID DESC");
 
