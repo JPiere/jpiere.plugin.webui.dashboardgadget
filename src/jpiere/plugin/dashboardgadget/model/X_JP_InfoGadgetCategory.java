@@ -41,6 +41,8 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 			setJP_InfoGadgetCategory_ID (0);
 			setJP_PageSize (0);
 // 5
+			setJP_UserDisplayPosition (null);
+// N
 			setMaxQueryRecords (0);
 // 0
 			setName (null);
@@ -159,6 +161,30 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
+	}
+
+	/** None = N */
+	public static final String JP_USERDISPLAYPOSITION_None = "N";
+	/** Right side of the title = R */
+	public static final String JP_USERDISPLAYPOSITION_RightSideOfTheTitle = "R";
+	/** Left side of the title = L */
+	public static final String JP_USERDISPLAYPOSITION_LeftSideOfTheTitle = "L";
+	/** Set User Display Position.
+		@param JP_UserDisplayPosition 
+		JPIERE-0110:JPPS
+	  */
+	public void setJP_UserDisplayPosition (String JP_UserDisplayPosition)
+	{
+
+		set_Value (COLUMNNAME_JP_UserDisplayPosition, JP_UserDisplayPosition);
+	}
+
+	/** Get User Display Position.
+		@return JPIERE-0110:JPPS
+	  */
+	public String getJP_UserDisplayPosition () 
+	{
+		return (String)get_Value(COLUMNNAME_JP_UserDisplayPosition);
 	}
 
 	/** Set Max Query Records.

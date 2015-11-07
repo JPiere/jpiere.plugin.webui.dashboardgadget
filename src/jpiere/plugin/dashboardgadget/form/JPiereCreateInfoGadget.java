@@ -145,14 +145,18 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 
 		if(isMultiLingual)
 		{
-			if(user==null)
+			if(user==null || infoGadget.getJP_InfoGadgetCategory().getJP_UserDisplayPosition().equals("N"))
 				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name"));
+			else if(infoGadget.getJP_InfoGadgetCategory().getJP_UserDisplayPosition().equals("R"))
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name") +" ["+user.getName()+"]" );
 			else
 				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" ["+user.getName()+"] " + infoGadget.get_Translation("Name"));
 
 		}else{
-			if(user==null)
+			if(user==null || infoGadget.getJP_InfoGadgetCategory().getJP_UserDisplayPosition().equals("N"))
 				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.getName());
+			else if(infoGadget.getJP_InfoGadgetCategory().getJP_UserDisplayPosition().equals("R"))
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.getName() +" ["+user.getName()+"]");
 			else
 				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" ["+user.getName()+"] " + infoGadget.getName());
 		}

@@ -17,6 +17,7 @@ CREATE TABLE adempiere.JP_InfoGadgetCategory
   Help character varying(2000),
   MaxQueryRecords numeric(10,0) NOT NULL DEFAULT 20::numeric,
   JP_PageSize numeric(10,0) NOT NULL DEFAULT 5::numeric,
+  jp_UserDisplayPosition character(1) NOT NULL DEFAULT 'N'::bpchar,
 
 
   CONSTRAINT JP_InfoGadgetCategory_pkey PRIMARY KEY (JP_InfoGadgetCategory_ID)

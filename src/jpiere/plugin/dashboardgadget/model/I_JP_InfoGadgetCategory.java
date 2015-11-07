@@ -146,6 +146,19 @@ public interface I_JP_InfoGadgetCategory
 	/** Get Page Size	  */
 	public int getJP_PageSize();
 
+    /** Column name JP_UserDisplayPosition */
+    public static final String COLUMNNAME_JP_UserDisplayPosition = "JP_UserDisplayPosition";
+
+	/** Set User Display Position.
+	  * JPIERE-0110:JPPS
+	  */
+	public void setJP_UserDisplayPosition (String JP_UserDisplayPosition);
+
+	/** Get User Display Position.
+	  * JPIERE-0110:JPPS
+	  */
+	public String getJP_UserDisplayPosition();
+
     /** Column name MaxQueryRecords */
     public static final String COLUMNNAME_MaxQueryRecords = "MaxQueryRecords";
 
