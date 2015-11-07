@@ -36,6 +36,7 @@ import org.compiere.model.MAttachmentEntry;
 import org.compiere.model.MClient;
 import org.compiere.model.MRole;
 import org.compiere.model.MTable;
+import org.compiere.model.MUser;
 import org.compiere.util.Env;
 import org.compiere.util.Language;
 import org.zkoss.util.media.AMedia;
@@ -112,8 +113,6 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 	private void createInfo(MInfoGadget infoGadget)
 	{
 
-
-
 		if(table_Trl == null)
 		{
 			isMultiLingual = false;
@@ -139,11 +138,23 @@ public class JPiereCreateInfoGadget extends DashboardPanel {
 
 		SimpleDateFormat sdf = lang.getDateFormat();
 		String groupTitle = null;
+
+		MUser user = null;
+		if(infoGadget.get_Value("AD_User_ID")!=null)
+			user = MUser.get(Env.getCtx(), infoGadget.getAD_User_ID());
+
 		if(isMultiLingual)
 		{
-			groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name"));
+			if(user==null)
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.get_Translation("Name"));
+			else
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" ["+user.getName()+"] " + infoGadget.get_Translation("Name"));
+
 		}else{
-			groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.getName());
+			if(user==null)
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" "+ infoGadget.getName());
+			else
+				groupTitle = new String(sdf.format(infoGadget.getDate1()) +" ["+user.getName()+"] " + infoGadget.getName());
 		}
 
 		Group innerRowGroup = new Group(groupTitle);

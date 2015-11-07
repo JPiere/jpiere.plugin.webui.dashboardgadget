@@ -23,14 +23,14 @@ import org.compiere.model.*;
 
 /** Generated Model for JP_InfoGadgetCategory
  *  @author iDempiere (generated) 
- *  @version Release 2.1 - $Id$ */
+ *  @version Release 3.1 - $Id$ */
 public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCategory, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20151002L;
+	private static final long serialVersionUID = 20151107L;
 
     /** Standard Constructor */
     public X_JP_InfoGadgetCategory (Properties ctx, int JP_InfoGadgetCategory_ID, String trxName)
@@ -42,7 +42,7 @@ public class X_JP_InfoGadgetCategory extends PO implements I_JP_InfoGadgetCatego
 			setJP_PageSize (0);
 // 5
 			setMaxQueryRecords (0);
-// 20
+// 0
 			setName (null);
 			setValue (null);
         } */

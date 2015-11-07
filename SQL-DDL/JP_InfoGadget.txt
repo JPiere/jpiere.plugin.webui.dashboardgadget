@@ -21,6 +21,7 @@ CREATE TABLE adempiere.JP_InfoGadget
   DateTo timestamp without time zone NOT NULL,
   IsCollapsedByDefault character(1) NOT NULL DEFAULT 'Y'::bpchar,
   PublishStatus character(1) NOT NULL DEFAULT 'U'::bpchar,
+  AD_User_ID numeric(10,0) DEFAULT NULL::numeric,
 
   CONSTRAINT JP_InfoGadget_pkey PRIMARY KEY (JP_InfoGadget_ID)
 )

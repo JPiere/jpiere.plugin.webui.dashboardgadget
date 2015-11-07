@@ -24,14 +24,14 @@ import org.compiere.model.*;
 
 /** Generated Model for JP_InfoGadget
  *  @author iDempiere (generated) 
- *  @version Release 2.1 - $Id$ */
+ *  @version Release 3.1 - $Id$ */
 public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20151002L;
+	private static final long serialVersionUID = 20151107L;
 
     /** Standard Constructor */
     public X_JP_InfoGadget (Properties ctx, int JP_InfoGadget_ID, String trxName)
@@ -40,8 +40,11 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
       /** if (JP_InfoGadget_ID == 0)
         {
 			setDate1 (new Timestamp( System.currentTimeMillis() ));
+// @#Date@
 			setDateFrom (new Timestamp( System.currentTimeMillis() ));
+// @SQL= SELECT DATE_TRUNC('day', TO_DATE('@#Date@', 'YYYY-MM-DD')) 
 			setDateTo (new Timestamp( System.currentTimeMillis() ));
+// @SQL= SELECT DATE_TRUNC('month', TO_DATE('@#Date@', 'YYYY-MM-DD')) + CAST('1 month' AS INTERVAL)-1
 			setIsCollapsedByDefault (false);
 // N
 			setJP_InfoGadgetCategory_ID (0);
@@ -80,6 +83,34 @@ public class X_JP_InfoGadget extends PO implements I_JP_InfoGadget, I_Persistent
         .append(get_ID()).append("]");
       return sb.toString();
     }
+
+	public org.compiere.model.I_AD_User getAD_User() throws RuntimeException
+    {
+		return (org.compiere.model.I_AD_User)MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
+			.getPO(getAD_User_ID(), get_TrxName());	}
+
+	/** Set User/Contact.
+		@param AD_User_ID 
+		User within the system - Internal or Business Partner Contact
+	  */
+	public void setAD_User_ID (int AD_User_ID)
+	{
+		if (AD_User_ID < 1) 
+			set_Value (COLUMNNAME_AD_User_ID, null);
+		else 
+			set_Value (COLUMNNAME_AD_User_ID, Integer.valueOf(AD_User_ID));
+	}
+
+	/** Get User/Contact.
+		@return User within the system - Internal or Business Partner Contact
+	  */
+	public int getAD_User_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_AD_User_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
 
 	/** Set Date.
 		@param Date1 
