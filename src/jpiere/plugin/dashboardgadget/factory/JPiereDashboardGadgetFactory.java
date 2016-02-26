@@ -22,7 +22,7 @@ import org.zkoss.zk.ui.Component;
 /**
  *  JPiere Plugins(JPPS) Dashboard Gadget Form Factory
  *
- *  @author Hideaki Hagiwara（萩原 秀明:h.hagiwara@oss-erp.co.jp）
+ *  @author Hideaki Hagiwara（h.hagiwara@oss-erp.co.jp）
  *
  */
 public class JPiereDashboardGadgetFactory implements IDashboardGadgetFactory {
