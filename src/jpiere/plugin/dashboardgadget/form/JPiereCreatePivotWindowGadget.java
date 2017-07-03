@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.adempiere.base.Service;
+import org.adempiere.webui.component.Label;
 import org.adempiere.webui.component.ToolBarButton;
 import org.adempiere.webui.dashboard.DashboardPanel;
 import org.adempiere.webui.factory.IFormFactory;
@@ -57,9 +58,29 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 	}
 
 	HashMap<Integer, Integer> pv_form_map = new HashMap<Integer, Integer>();
+	boolean hasPivotWindow = false;
 			
 	private Box createPivotWindowGadgetPanel()
 	{
+		//Check Plugin of Pivot Window exist
+		List<IFormFactory> factories = Service.locator().list(IFormFactory.class).getServices();
+		if (factories != null) 
+		{
+			for(IFormFactory factory : factories) 
+			{
+				if(factory.toString().equals("PivotWindow"))
+				{
+					hasPivotWindow = true;
+					break;
+				}
+			}
+		}
+		
+		if(!hasPivotWindow)
+		{
+			this.appendChild(new Label("ピボットウィンドウを表示してね"));//TODO:ピボットウィンドウの案内
+		}
+		
 		MRole role = MRole.getDefault();
 		
 		List<MForm> formList = new Query(Env.getCtx(), "AD_Form", "Classname like 'JP_PivotWindow_ID=%'", null)
@@ -108,22 +129,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 		if(eventName.equals(Events.ON_CLICK))
 		{
 			if(comp instanceof ToolBarButton)
-			{
-				//Check Plugin of Pivot Window exist
-				boolean hasPivotWindow = false;
-				List<IFormFactory> factories = Service.locator().list(IFormFactory.class).getServices();
-				if (factories != null) 
-				{
-					for(IFormFactory factory : factories) 
-					{
-						if(factory.toString().equals("PivotWindow"))
-						{
-							hasPivotWindow = true;
-							break;
-						}
-					}
-				}
-				
+			{				
 				if(hasPivotWindow)
 				{
 				
