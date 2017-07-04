@@ -85,7 +85,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_JPiereSupporter")));//Pivot Window use library of ZK Pivottable that is Commercial License.
 			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_SupporterURL")));
 			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_Demo")));//You can try Pivot Window at JPiere Demo site.
-			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_DemoSiteURL")));//<p>JPiere Demo Site: <a href="http://jpiere.net/webui/" target="_blank">http://jpiere.net/webui/</a></p>
+			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_DemoSiteURL")));//<p>JPiere Demo Site: <a href="http://jpiere.net/webui/" target="_blank">http://jpiere.net/webui/</a></p>
 		}
 		
 		MRole role = MRole.getDefault();
