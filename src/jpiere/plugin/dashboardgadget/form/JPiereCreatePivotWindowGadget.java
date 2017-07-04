@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.adempiere.base.Service;
-import org.adempiere.webui.component.Label;
 import org.adempiere.webui.component.ToolBarButton;
 import org.adempiere.webui.dashboard.DashboardPanel;
 import org.adempiere.webui.factory.IFormFactory;
@@ -37,7 +36,9 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Html;
 import org.zkoss.zul.Vbox;
+import org.zkoss.zul.Vlayout;
 
 
 /**
@@ -78,7 +79,13 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 		
 		if(!hasPivotWindow)
 		{
-			this.appendChild(new Label("ピボットウィンドウを表示してね"));//TODO:ピボットウィンドウの案内
+			Vlayout div = new Vlayout();
+			this.appendChild(div);
+			div.setStyle("font-size: 12px;line-height: 18px;border: 1px solid #dddddd; padding: 2px; margin: 2px");
+			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_JPiereSupporter")));//Pivot Window use library of ZK Pivottable that is Commercial License.
+			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_SupporterURL")));
+			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_Demo")));//You can try Pivot Window at JPiere Demo site.
+			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_DemoSiteURL")));//<p>JPiere Demo Site: <a href="http://jpiere.net/webui/" target="_blank">http://jpiere.net/webui/</a></p>
 		}
 		
 		MRole role = MRole.getDefault();
@@ -147,8 +154,11 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 					SessionManager.getAppDesktop().openForm(pv_form_map.get(JP_PivotWindow_ID));
 					
 				}else{
-					//TODO ピボットウィンドウの案内パネル作成
-					FDialog.info(0, this, "Saved", Msg.getMsg(Env.getCtx(), "Error"), Msg.getElement(Env.getCtx(), "JP_PivotWindow_ID") );
+					
+					FDialog.info(0, this
+							, Msg.getMsg(Env.getCtx(), "JP_PivotWindow_JPiereSupporter")//Pivot Window use library of ZK Pivottable that is Commercial License.
+							, Msg.getMsg(Env.getCtx(), "JP_PivotWindow_Demo")			//You can try Pivot Window at JPiere Demo site.
+							, Msg.getElement(Env.getCtx(), "JP_PivotWindow_ID") );
 				}
 			}
 
