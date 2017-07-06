@@ -94,33 +94,41 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 				.setOnlyActiveRecords(true)
 				.list();
 		
+		Boolean isOK = new Boolean(false);
 		for(MForm form : formList)
 		{
-			if(role.getFormAccess(form.getAD_Form_ID()))
+			isOK = role.getFormAccess(form.getAD_Form_ID());
+			if(isOK != null && isOK.booleanValue())
 				pv_form_map.put(Integer.valueOf(form.getClassname().substring("JP_PivotWindow_ID=".length())), form.getAD_Form_ID() );
 		}
 		
-		List<PO> pivotWindowList = new Query(Env.getCtx(), "JP_PivotWindow", "IsValid='Y' AND IsShowInDashboard='Y'", null)
-		.setOnlyActiveRecords(true)
-		.setOrderBy("SeqNo")
-		.list();
-		
-		PO[] pivots = pivotWindowList.toArray(new PO[pivotWindowList.size()]);
-		int JP_PivotWindow_ID = 0;
 		Vbox vbox = new Vbox();
-		for (int i = 0; i < pivots.length; i++)
+		if(pv_form_map.size() > 0)
 		{
-			PO pivot = pivots[i];
-			JP_PivotWindow_ID = pivot.get_ValueAsInt("JP_PivotWindow_ID");
-			if(JP_PivotWindow_ID > 0 && role.getFormAccess(pv_form_map.get(JP_PivotWindow_ID)))
+		
+			List<PO> pivotWindowList = new Query(Env.getCtx(), "JP_PivotWindow", "IsValid='Y' AND IsShowInDashboard='Y'", null)
+			.setOnlyActiveRecords(true)
+			.setOrderBy("SeqNo")
+			.list();
+			
+			PO[] pivots = pivotWindowList.toArray(new PO[pivotWindowList.size()]);
+			int JP_PivotWindow_ID = 0;
+			
+			for (int i = 0; i < pivots.length; i++)
 			{
-				ToolBarButton btn = new ToolBarButton(pivot.get_ValueAsString("Name"));
-				btn.setSclass("link");
-				btn.setLabel(pivot.get_Translation("Name"));
-				btn.setImage(ThemeManager.getThemeResource("images/" + (Util.isEmpty(pivot.get_ValueAsString("ImageURL")) ? "Info16.png" : pivot.get_Value("ImageURL"))));
-				btn.addEventListener(Events.ON_CLICK, this);
-				vbox.appendChild(btn);
+				PO pivot = pivots[i];
+				JP_PivotWindow_ID = pivot.get_ValueAsInt("JP_PivotWindow_ID");
+				if(JP_PivotWindow_ID > 0 && role.getFormAccess(pv_form_map.get(JP_PivotWindow_ID)))
+				{
+					ToolBarButton btn = new ToolBarButton(pivot.get_ValueAsString("Name"));
+					btn.setSclass("link");
+					btn.setLabel(pivot.get_Translation("Name"));
+					btn.setImage(ThemeManager.getThemeResource("images/" + (Util.isEmpty(pivot.get_ValueAsString("ImageURL")) ? "Info16.png" : pivot.get_Value("ImageURL"))));
+					btn.addEventListener(Events.ON_CLICK, this);
+					vbox.appendChild(btn);
+				}
 			}
+		
 		}
 
 		return vbox;
