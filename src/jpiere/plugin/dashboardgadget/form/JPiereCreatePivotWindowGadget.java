@@ -118,7 +118,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 			{
 				PO pivot = pivots[i];
 				JP_PivotWindow_ID = pivot.get_ValueAsInt("JP_PivotWindow_ID");
-				if(JP_PivotWindow_ID > 0 && role.getFormAccess(pv_form_map.get(JP_PivotWindow_ID)))
+				if(JP_PivotWindow_ID > 0 && pv_form_map.get(JP_PivotWindow_ID) != null && role.getFormAccess(pv_form_map.get(JP_PivotWindow_ID)))
 				{
 					ToolBarButton btn = new ToolBarButton(pivot.get_ValueAsString("Name"));
 					btn.setSclass("link");
