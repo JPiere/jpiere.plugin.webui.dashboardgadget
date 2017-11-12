@@ -60,14 +60,14 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 
 	HashMap<Integer, Integer> pv_form_map = new HashMap<Integer, Integer>();
 	boolean hasPivotWindow = false;
-			
+
 	private Box createPivotWindowGadgetPanel()
 	{
 		//Check Plugin of Pivot Window exist
 		List<IFormFactory> factories = Service.locator().list(IFormFactory.class).getServices();
-		if (factories != null) 
+		if (factories != null)
 		{
-			for(IFormFactory factory : factories) 
+			for(IFormFactory factory : factories)
 			{
 				if(factory.toString().equals("PivotWindow"))
 				{
@@ -76,7 +76,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 				}
 			}
 		}
-		
+
 		if(!hasPivotWindow)
 		{
 			Vlayout div = new Vlayout();
@@ -87,13 +87,13 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_PivotWindow_Demo")));//You can try Pivot Window at JPiere Demo site.
 			div.appendChild(new Html(Msg.getMsg(Env.getCtx(), "JP_DemoSiteURL")));//<p>JPiere Demo Site: <a href="http://jpiere.net/webui/" target="_blank">http://jpiere.net/webui/</a></p>
 		}
-		
+
 		MRole role = MRole.getDefault();
-		
+
 		List<MForm> formList = new Query(Env.getCtx(), "AD_Form", "Classname like 'JP_PivotWindow_ID=%'", null)
 				.setOnlyActiveRecords(true)
 				.list();
-		
+
 		Boolean isOK = new Boolean(false);
 		for(MForm form : formList)
 		{
@@ -101,19 +101,19 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 			if(isOK != null && isOK.booleanValue())
 				pv_form_map.put(Integer.valueOf(form.getClassname().substring("JP_PivotWindow_ID=".length())), form.getAD_Form_ID() );
 		}
-		
+
 		Vbox vbox = new Vbox();
 		if(pv_form_map.size() > 0)
 		{
-		
+
 			List<PO> pivotWindowList = new Query(Env.getCtx(), "JP_PivotWindow", "IsValid='Y' AND IsShowInDashboard='Y'", null)
 			.setOnlyActiveRecords(true)
 			.setOrderBy("SeqNo")
 			.list();
-			
+
 			PO[] pivots = pivotWindowList.toArray(new PO[pivotWindowList.size()]);
 			int JP_PivotWindow_ID = 0;
-			
+
 			for (int i = 0; i < pivots.length; i++)
 			{
 				PO pivot = pivots[i];
@@ -123,46 +123,55 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 					ToolBarButton btn = new ToolBarButton(pivot.get_ValueAsString("Name"));
 					btn.setSclass("link");
 					btn.setLabel(pivot.get_Translation("Name"));
-					btn.setImage(ThemeManager.getThemeResource("images/" + (Util.isEmpty(pivot.get_ValueAsString("ImageURL")) ? "Info16.png" : pivot.get_Value("ImageURL"))));
+					String image = (String) (Util.isEmpty(pivot.get_ValueAsString("ImageURL"))? "Info16.png" : pivot.get_Value("ImageURL"));
+					if ("Y".equals(Env.getContext(Env.getCtx(), "#THEME_USE_FONT_ICON_FOR_IMAGE")))
+					{
+						image = image.replace("16.png", "");
+						btn.setIconSclass("z-icon-"+image);
+					}
+					else
+					{
+						btn.setImage(ThemeManager.getThemeResource("images/" + (Util.isEmpty(pivot.get_ValueAsString("ImageURL")) ? "Info16.png" : pivot.get_Value("ImageURL"))));
+					}
 					btn.addEventListener(Events.ON_CLICK, this);
 					vbox.appendChild(btn);
 				}
-			}
-		
+			}//for
+
 		}
 
 		return vbox;
-	
+
 	}
-	
+
 
 	@Override
-	public void onEvent(Event event) throws Exception 
+	public void onEvent(Event event) throws Exception
 	{
 		Component comp = event.getTarget();
 		String eventName = event.getName();
 		if(eventName.equals(Events.ON_CLICK))
 		{
 			if(comp instanceof ToolBarButton)
-			{				
+			{
 				if(hasPivotWindow)
 				{
-				
+
 					ToolBarButton btn = (ToolBarButton) comp;
 					String actionCommand = btn.getName();
-	
+
 					int JP_PivotWindow_ID = new Query(Env.getCtx(), "JP_PivotWindow", "Name = ?", null)
 					.setParameters(actionCommand)
 					.setOnlyActiveRecords(true)
 					.firstIdOnly();
-	
+
 					if (JP_PivotWindow_ID<=0)
 						return;
-					
+
 					SessionManager.getAppDesktop().openForm(pv_form_map.get(JP_PivotWindow_ID));
-					
+
 				}else{
-					
+
 					FDialog.info(0, this
 							, Msg.getMsg(Env.getCtx(), "JP_PivotWindow_JPiereSupporter")//Pivot Window use library of ZK Pivottable that is Commercial License.
 							, Msg.getMsg(Env.getCtx(), "JP_PivotWindow_Demo")			//You can try Pivot Window at JPiere Demo site.
