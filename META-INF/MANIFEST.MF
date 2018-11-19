@@ -20,6 +20,5 @@ Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
 Service-Component: OSGI-INF/JPiereDashboardGadgetModelFactory.xml,
  OSGI-INF/JPiereDashboardGadgetFactory.xml
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ClassPath: .
 Import-Package: javax.activation
+Automatic-Module-Name: jpiere.plugin.webui.dashboardgadget

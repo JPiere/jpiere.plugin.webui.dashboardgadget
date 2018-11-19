@@ -94,7 +94,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 				.setOnlyActiveRecords(true)
 				.list();
 
-		Boolean isOK = new Boolean(false);
+		Boolean isOK = Boolean.valueOf(false);
 		for(MForm form : formList)
 		{
 			isOK = role.getFormAccess(form.getAD_Form_ID());
@@ -124,7 +124,7 @@ public class JPiereCreatePivotWindowGadget extends DashboardPanel  implements Ev
 					btn.setSclass("link");
 					btn.setLabel(pivot.get_Translation("Name"));
 					String image = (String) (Util.isEmpty(pivot.get_ValueAsString("ImageURL"))? "Info16.png" : pivot.get_Value("ImageURL"));
-					if ("Y".equals(Env.getContext(Env.getCtx(), "#THEME_USE_FONT_ICON_FOR_IMAGE")))
+					if (ThemeManager.isUseFontIconForImage())
 					{
 						image = image.replace("16.png", "");
 						btn.setIconSclass("z-icon-"+image);
