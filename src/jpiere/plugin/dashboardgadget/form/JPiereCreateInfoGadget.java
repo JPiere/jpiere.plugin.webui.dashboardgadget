@@ -21,9 +21,6 @@ import java.util.Calendar;
 
 import javax.activation.MimetypesFileTypeMap;
 
-import jpiere.plugin.dashboardgadget.model.MInfoGadget;
-import jpiere.plugin.dashboardgadget.model.MInfoGadgetCategory;
-
 import org.adempiere.webui.component.DynamicMediaLink;
 import org.adempiere.webui.component.Grid;
 import org.adempiere.webui.component.GridFactory;
@@ -42,6 +39,9 @@ import org.compiere.util.Language;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zul.Html;
 import org.zkoss.zul.Row;
+
+import jpiere.plugin.dashboardgadget.model.MInfoGadget;
+import jpiere.plugin.dashboardgadget.model.MInfoGadgetCategory;
 
 
 /**

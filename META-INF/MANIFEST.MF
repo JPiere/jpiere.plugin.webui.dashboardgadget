@@ -2,9 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: jpiere.plugin.dashboardgadget
 Bundle-SymbolicName: jpiere.plugin.webui.dashboardgadget;singleton:=true
-Bundle-Version: 5.1.0.qualifier
+Bundle-Version: 6.1.0.qualifier
 Bundle-Vendor: OSS ERP Solutions
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.adempiere.base;bundle-version="2.1.0",
  org.adempiere.plugin.utils;bundle-version="2.1.0",
  org.adempiere.ui.zk;bundle-version="2.1.0",
@@ -16,8 +15,10 @@ Require-Bundle: org.adempiere.base;bundle-version="2.1.0",
  zkbind;bundle-version="8.0.1",
  zkplus;bundle-version="8.0.1",
  zul;bundle-version="8.0.1",
- zweb;bundle-version="8.0.1"
+ zweb;bundle-version="8.0.1",
+ javax.activation;bundle-version="1.1.0"
 Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
 Service-Component: OSGI-INF/JPiereDashboardGadgetModelFactory.xml,
  OSGI-INF/JPiereDashboardGadgetFactory.xml
+Automatic-Module-Name: jpiere.plugin.webui.dashboardgadget
 Bundle-ActivationPolicy: lazy
