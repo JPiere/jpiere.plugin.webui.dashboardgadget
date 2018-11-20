@@ -14,13 +14,13 @@
 package jpiere.plugin.dashboardgadget.factory;
 
 
-import jpiere.plugin.dashboardgadget.form.JPiereCreateInfoGadget;
-import jpiere.plugin.dashboardgadget.form.JPiereCreatePivotWindowGadget;
-
 import org.adempiere.webui.factory.IDashboardGadgetFactory;
 import org.compiere.model.MTable;
 import org.compiere.util.Env;
 import org.zkoss.zk.ui.Component;
+
+import jpiere.plugin.dashboardgadget.form.JPiereCreateInfoGadget;
+import jpiere.plugin.dashboardgadget.form.JPiereCreatePivotWindowGadget;
 
 /**
  *  JPiere Plugins(JPPS) Dashboard Gadget Form Factory
@@ -36,17 +36,17 @@ public class JPiereDashboardGadgetFactory implements IDashboardGadgetFactory {
 		if (uri != null && uri.startsWith("JP_InfoGadgetCategory_ID="))
 		{
 			String JP_InfoGadgetCategory_ID = uri.substring("JP_InfoGadgetCategory_ID=".length());
-		   return new JPiereCreateInfoGadget(new Integer(JP_InfoGadgetCategory_ID).intValue());
-		
+		   return new JPiereCreateInfoGadget(Integer.valueOf(JP_InfoGadgetCategory_ID).intValue());
+
 		}else if (uri != null && uri.startsWith("JP_PivotWindow")){//JPIERE-0359
-			
+
 			MTable pivotWidnowTable = MTable.get(Env.getCtx(), "JP_PivotWindow");
 			if(pivotWidnowTable == null)
 				return null;
-			
+
 			return new JPiereCreatePivotWindowGadget();
 		}
-		
+
 		return null;
 	}
 
