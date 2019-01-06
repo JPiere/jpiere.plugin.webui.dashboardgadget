@@ -16,11 +16,10 @@ Require-Bundle: org.adempiere.base;bundle-version="2.1.0",
  zkplus;bundle-version="8.0.1",
  zul;bundle-version="8.0.1",
  zweb;bundle-version="8.0.1",
- javax.activation;bundle-version="1.1.0"
+ com.sun.activation.jakarta.activation;bundle-version="1.2.1"
 Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
 Service-Component: OSGI-INF/JPiereDashboardGadgetModelFactory.xml,
  OSGI-INF/JPiereDashboardGadgetFactory.xml
 Automatic-Module-Name: jpiere.plugin.webui.dashboardgadget
-Import-Package: javax.activation
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
