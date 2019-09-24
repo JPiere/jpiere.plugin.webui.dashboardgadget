@@ -23,3 +23,4 @@ Service-Component: OSGI-INF/JPiereDashboardGadgetModelFactory.xml,
 Automatic-Module-Name: jpiere.plugin.webui.dashboardgadget
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-11
